@@ -17,7 +17,7 @@ procedure jobs_ok is
 	WhiteSpace: Character;
 	--Add in extra methods here
 	
-	function jobsGood (EmployeeList : Employees, Shifts : TimeSheet) return Boolean is
+	function jobsGood (EmployeeList : Employees, Shifts : TimeSheet, NumberOfEmployees : Integer) return Boolean is
 		PhonesA : Character;
 		PhonesB : character;
 		Computer : character;
@@ -29,7 +29,7 @@ procedure jobs_ok is
 			PhonesB := TimeSheet[2][time];
 			Computer := TimeSheet[3][time];
 			Network := TimeSheet[4][time];
-			for person in 1..26 loop
+			for person in 1..NumberOfEmployees loop
 				if PhonesA = EmployeesList[person].Person then
 					if 0 = EmployeesList[person].Phone then
 						ScheduleGood := false;
@@ -74,7 +74,7 @@ begin
 		Get(Employee(Line).Network);
 		Skip_Line;
 	end loop;
-	if jobsGood(Employee, ShiftsList) and --Whatever Jarret Calls his function then
+	if jobsGood(Employee, ShiftsList, NumberOfEmployees) and --Whatever Jarret Calls his function then
 		put("Acceptable");
 	else
 		put("Not Acceptable");
