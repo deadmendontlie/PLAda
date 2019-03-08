@@ -1,3 +1,4 @@
+--By Kody Leptien and Jarret Strickton
 with Ada.Text_IO, Ada.Integer_Text_IO, Ada.Numerics;
 use Ada.Text_IO, Ada.Integer_Text_IO, Ada.Numerics;
 
