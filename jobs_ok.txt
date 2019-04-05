@@ -1,0 +1,75 @@
+%By Kody Leptien, and Jarret Strickon
+%jobs_ok(+Assigment, Employees)
+jobs_ok(Assignment, Employees) :-
+	ntho(0, Assignment, First),
+	ntho(1, Assignment, Second),
+	ntho(2, Assignment, Third),
+	ntho(3, Assignment, Fourth),
+	ntho(0, First, A),
+	ntho(1, First, B),
+	ntho(2, First, C),
+	ntho(3, First, D),
+	ntho(0, Second, E),
+        ntho(1, Second, F),
+        ntho(2, Second, G),
+        ntho(3, Second, H),
+	ntho(0, Third, I),
+        ntho(1, Third, J),
+        ntho(2, Third, K),
+        ntho(3, Third, L),
+	ntho(0, Fourth, M),
+        ntho(1, Fourth, N),
+        ntho(2, Fourth, O),
+        ntho(3, Fourth, P),
+	check_shiftone(A, Second, Third, Fourth),
+	check_shiftone(B, Second, Third, Fourth),
+	check_shiftone(C, Second, Third, Fourth),
+	check_shiftone(D, Second, Third, Fourth),
+	check_shifttwo(E, Third, Fourth),
+        check_shifttwo(F, Third, Fourth),
+        check_shifttwo(G, Third, Fourth),
+        check_shifttwo(H, Third, Fourth),
+	check_shiftthree(I, Fourth),
+        check_shiftthree(J, Fourth),
+        check_shiftthree(K, Fourth),
+        check_shiftthree(L, Fourth),
+	samescheduledups(A, B, C, D),
+	samescheduledups(E, F, G, H),
+	samescheduledups(I, J, K, L),
+	samescheduledups(M, N, O, P),
+	
+%shift_dups(+Person, +L) Figures out if a list is good
+shift_dups(Person, Shift) :-
+	+/member(Person, Shift).
+
+%check_phones(+Person, +L) checks to see if the person has the phones skill
+check_phones(Person, [H | P | T]) :-
+	P = 1.
+
+%check_computers(+Person, +L) checks to see if the person has the phones skill
+check_phones(Person, [H | P | C | T]) :-
+        C = 1.
+
+%check_network(+Person, +L) checks to see if the person has the phones skill
+check_phones(Person, [H | P | C | N | T]) :-
+        N = 1.
+%check_shiftone(+Person, +ShiftTwo, +ShiftThree, +ShiftFour)
+check_shiftone(Person, ShiftTwo, ShiftThree, ShiftFour) :-
+	shift_dups(Person, ShiftTwo),
+        shift_dups(PersonOne, ShiftThree),
+        shift_dups(PersonOne, ShiftFour).
+
+check_shifttwo(Person, ShiftThree, ShiftFour) :-
+        shift_dups(PersonOne, ShiftThree),
+        shift_dups(PersonOne, ShiftFour).
+
+check_shiftthree(Person, ShiftFour) :-
+        shift_dups(PersonOne, ShiftFour).
+
+samescheduledups(One, Two, Three, Four) :-
+	One \= Two,
+	One \= Three,
+	One \= Four,
+	Two \= Three,
+	Two \= Four,
+	Three\= Four.
